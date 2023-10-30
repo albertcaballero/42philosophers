@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/10/30 15:20:30 by alcaball         ###   ########.fr       */
+/*   Created: 2023/10/28 12:49:21 by alcaball          #+#    #+#             */
+/*   Updated: 2023/10/30 11:18:18 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "philosophers.h"
 
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <sys/time.h>
-
-typedef struct s_params
+int	ft_atoi(const char *str)
 {
-	int			num;
-	int			status;
-	int			ttdie;
-	int			tteat;
-	int			ttsleep;
-	int			eatcount;
-	t_philos	*next;
-}	t_philos;
+	int	i;
+	int	numb;
+	int	flag;
 
-int			ft_atoi(const char *str);
-t_philos	init_params(char **argv, int argc, int i);
-
-#endif
+	i = 0;
+	numb = 0;
+	flag = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == 43 || str[i] == 45)
+	{
+		if (str[i] == 45)
+			flag = -1;
+		i++;
+	}
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		numb = (numb * 10 + (str[i] - 48));
+		i++;
+	}
+	return (numb * flag);
+}

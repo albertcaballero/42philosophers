@@ -11,7 +11,7 @@ PURPLE  =   \033[38;5;93m
 PINK	=	\033[38;5;219m
 NC      =   \033[0m
 
-SRC = philo.c parseargs.c
+SRC = philo.c parseargs.c utils.c
 
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 DIR_O = temp
@@ -19,7 +19,7 @@ DIR_O = temp
 all: temp $(NAME)
 
 $(NAME): $(OBJS) $(LIBRARY) Makefile $(SRC)
-	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) #-fsanitize="address,undefined" -g
+	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) #-fsanitize="thread" -g
 	@printf "${PURPLE}== PHILO COMPILED SUCCESSFULLY ==\n${NC}"
 	
 # temp:
