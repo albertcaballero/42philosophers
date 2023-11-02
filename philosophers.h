@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/10/30 15:20:30 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:46:02 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,14 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdio.h>
 
-typedef struct s_params
+# define SLEEPING 3
+# define EATING 1
+# define THINKING 2
+# define FINISHED 4
+
+typedef struct s_ph
 {
 	int			num;
 	int			status;
@@ -27,10 +33,19 @@ typedef struct s_params
 	int			tteat;
 	int			ttsleep;
 	int			eatcount;
-	t_philos	*next;
+	struct s_ph	*next;
 }	t_philos;
 
+typedef struct s_params
+{
+	int	num;
+	int	ttdie;
+	int	tteat;
+	int	ttsleep;
+	int	eatcount;
+}	t_params;
+
 int			ft_atoi(const char *str);
-t_philos	init_params(char **argv, int argc, int i);
+t_philos	*init_params(char **argv, int argc);
 
 #endif

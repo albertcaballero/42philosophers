@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/10/30 15:20:54 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:32:26 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_philos	*init_philos(char **argv, int argc)
 	t_philos	*first;
 	int			i;
 
-	i = 0;
+	i = 1;
 	params = malloc(sizeof(params));
 	first = params;
-	while (i < ft_atoi(argv[1]))
+	while (i <= ft_atoi(argv[1]))
 	{
-		params->num = ft_atoi(argv[1]);
+		params->num = i;
 		params->ttdie = ft_atoi(argv[2]);
 		params->tteat = ft_atoi(argv[3]);
 		params->ttsleep = ft_atoi(argv[4]);
@@ -35,5 +35,6 @@ t_philos	*init_philos(char **argv, int argc)
 		params = params->next;
 		i++;
 	}
-	return (params);
+	params->next = first;
+	return (first);
 }
