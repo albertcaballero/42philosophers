@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/02 14:46:02 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/03 19:46:34 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@
 
 typedef struct s_ph
 {
-	int			num;
-	int			status;
-	int			ttdie;
-	int			tteat;
-	int			ttsleep;
-	int			eatcount;
-	struct s_ph	*next;
+	pthread_t		t;
+	int				num;
+	int				status;
+	int				ttdie;
+	int				tteat;
+	int				ttsleep;
+	int				eatcount;
+	struct s_ph		*next;
+	pthread_mutex_t	rfork;
+	pthread_mutex_t	lfork;
 }	t_philos;
 
 typedef struct s_params
@@ -46,6 +49,6 @@ typedef struct s_params
 }	t_params;
 
 int			ft_atoi(const char *str);
-t_philos	*init_params(char **argv, int argc);
+t_philos	*init_philos(char **argv, int argc);
 
 #endif
