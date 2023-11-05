@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/04 17:22:48 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/05 14:20:03 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_ph
 	int				tteat;
 	int				ttsleep;
 	int				eatcount;
-	pthread_mutex_t	rfork;
-	pthread_mutex_t	lfork;
+	pthread_mutex_t	*rfork;
+	pthread_mutex_t	*lfork;
 }	t_philos;
 
 typedef struct s_params
