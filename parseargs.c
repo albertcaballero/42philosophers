@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/04 17:21:52 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:55:29 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_params	init_params(char **argv, int argc)
 		params.eatcount = ft_atoi(argv[5]);
 	else
 		params.eatcount = INT32_MAX;
+	return (params);
 }
 
 t_philos	*init_philos(t_params params)
@@ -32,18 +33,18 @@ t_philos	*init_philos(t_params params)
 	int			i;
 
 	i = 1;
-	philos = malloc(sizeof(t_philos) * ft_atoi(argv[1]));
-	while (i <= ft_atoi(argv[1]))
+	philos = malloc(sizeof(t_philos) * params.num);
+	while (i <= params.num)
 	{
 		philos[i].num = i;
-		philos[i].tid = i;
-		philos[i].ttdie = ft_atoi(argv[2]);
-		philos[i].tteat = ft_atoi(argv[3]);
-		philos[i].ttsleep = ft_atoi(argv[4]);
-		if (argc == 6)
-			philos[i].eatcount = ft_atoi(argv[5]);
+		philos[i].tid = (pthread_t)1;
+		philos[i].ttdie = params.ttdie;
+		philos[i].tteat = params.tteat;
+		philos[i].ttsleep = params.ttsleep;
+		if (params.eatcount < INT32_MAX)
+			philos[i].eatcount = params.eatcount;
 		else
-			philos[i].eatcount = 1;
+			philos[i].eatcount = INT32_MAX;
 		i++;
 	}
 	return (philos);

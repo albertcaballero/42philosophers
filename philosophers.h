@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/05 14:20:03 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/06 12:01:01 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,18 @@ typedef struct s_ph
 
 typedef struct s_params
 {
-	int	num;
-	int	ttdie;
-	int	tteat;
-	int	ttsleep;
-	int	eatcount;
+	int				num;
+	int				ttdie;
+	int				tteat;
+	int				ttsleep;
+	int				eatcount;
+	unsigned long	starttime;
+	pthread_mutex_t	*forks;
 }	t_params;
 
 int			ft_atoi(const char *str);
 t_params	init_params(char **argv, int argc);
 t_philos	*init_philos(t_params params);
+unsigned long	my_time(void);
 
 #endif

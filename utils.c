@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:49:21 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/02 14:26:20 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:41:56 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,15 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (numb * flag);
+}
+
+unsigned long	my_time(void)
+{
+	struct timeval	abstime;
+	unsigned long	philotime;
+
+	if (gettimeofday(&abstime, NULL) == -1)
+		return (write(2, "ERROR getting time", 18));
+	philotime = abstime.tv_sec * 1000 + abstime.tv_usec / 1000;
+	return (philotime);
 }
