@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/06 11:55:29 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:51:16 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_philos	*init_philos(t_params params)
 	while (i <= params.num)
 	{
 		philos[i].num = i;
-		philos[i].tid = (pthread_t)1;
 		philos[i].ttdie = params.ttdie;
 		philos[i].tteat = params.tteat;
 		philos[i].ttsleep = params.ttsleep;

@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/06 12:01:01 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:38:31 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@
 # define THINKING 2
 # define FINISHED 4
 
+struct	s_params;
+
 typedef struct s_ph
 {
-	pthread_t		tid;
+	pthread_t		*tid;
 	int				num;
 	int				status;
 	int				ttdie;
 	int				tteat;
 	int				ttsleep;
 	int				eatcount;
-	pthread_mutex_t	*rfork;
-	pthread_mutex_t	*lfork;
+	struct s_params	*params;
 }	t_philos;
 
 typedef struct s_params
@@ -47,6 +48,8 @@ typedef struct s_params
 	int				eatcount;
 	unsigned long	starttime;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t lock;
+	t_philos		*philos;
 }	t_params;
 
 int			ft_atoi(const char *str);
