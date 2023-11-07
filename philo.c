@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/07 13:21:05 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:13:14 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void	*cycle(void *info_def)
 
 	info = (t_params *) info_def;
 	i = info->philos->num;
-	printf("time now %lu\n", my_time());
 	pthread_mutex_lock(&info->forks[i]);
 	info->philos[i].rfork = &info->forks[i];
-	printf("%lu %i has taken rfork\n", my_time() - info->starttime, info->philos->num);
+	printf("%lu %i has taken rfork\n", my_time() - info->starttime, i);
 	pthread_mutex_unlock(&info->forks[i]);
 	return (NULL);
 }
@@ -33,7 +32,7 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 	int			i;
 
 	if (argc != 5 && argc != 6)
-		return (0);
+		return (write(2, "Invalid params", 14), 1);
 	i = 0;
 	initial = init_params(argv, argc);
 	initial.philos = init_philos(initial);
@@ -44,8 +43,7 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 		return (write(2, "Wrong philo count", 17), 1);
 	initial.forks = malloc(initial.num * sizeof(pthread_mutexattr_t));
 	initial.starttime = my_time();
-	printf("start time = %lu\n", my_time());
-	usleep(46465);
+	printf("start time = %lu\n", initial.starttime);
 	while (i < initial.num)
 	{
 		initial.philos[i].tid = malloc (sizeof(pthread_t));
