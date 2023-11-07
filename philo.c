@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/07 12:42:26 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/07 13:21:05 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	*cycle(void *info_def)
 	info = (t_params *) info_def;
 	i = info->philos->num;
 	printf("time now %lu\n", my_time());
-	pthread_mutex_lock(&info->forks[0]);
-	info->philos[i].rfork = &info->forks[i]; //bus error
+	pthread_mutex_lock(&info->forks[i]);
+	info->philos[i].rfork = &info->forks[i];
 	printf("%lu %i has taken rfork\n", my_time() - info->starttime, info->philos->num);
-	pthread_mutex_unlock(&info->forks[0]);
+	pthread_mutex_unlock(&info->forks[i]);
 	return (NULL);
 }
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 	initial.forks = malloc(initial.num * sizeof(pthread_mutexattr_t));
 	initial.starttime = my_time();
 	printf("start time = %lu\n", my_time());
-	usleep
+	usleep(46465);
 	while (i < initial.num)
 	{
 		initial.philos[i].tid = malloc (sizeof(pthread_t));
