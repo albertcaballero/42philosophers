@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/07 15:00:02 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:41:16 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,23 @@ t_params	init_params(char **argv, int argc)
 	return (params);
 }
 
-t_philos	*init_philos(t_params params)
+void	init_philos(t_params *params)
 {
-	t_philos	*philos;
 	int			i;
 
 	i = 1;
-	philos = malloc(sizeof(t_philos) * params.num);
-	while (i <= params.num)
+	params->philos = malloc(sizeof(t_philos) * params->num);
+	while (i <= params->num)
 	{
-		philos[i].num = i;
-		philos[i].ttdie = params.ttdie;
-		philos[i].tteat = params.tteat;
-		philos[i].ttsleep = params.ttsleep;
-		if (params.eatcount < INT32_MAX)
-			philos[i].eatcount = params.eatcount;
+		params->philos[i].num = i;
+		params->philos[i].ttdie = params->ttdie;
+		params->philos[i].tteat = params->tteat;
+		params->philos[i].ttsleep = params->ttsleep;
+		if (params->eatcount < INT32_MAX)
+			params->philos[i].eatcount = params->eatcount;
 		else
-			philos[i].eatcount = INT32_MAX;
+			params->philos[i].eatcount = INT32_MAX;
 		i++;
+		params->philos[i].params = params;
 	}
-	return (philos);
 }
