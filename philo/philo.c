@@ -6,20 +6,21 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/07 19:15:20 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:28:26 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 void	*cycle(void *void_philo)
-{ //CRASHES WHENEVER WE TRY TO ACCESS PHILO->PARAMS (the struct within the struct)
+{
 	int			i;
 	t_philos	*philo;
 
 	philo = (t_philos *) void_philo;
-	i = philo->num;
-	pthread_mutex_lock(&philo->lock); //THIS IS NOT THE CORRECT LOCK (probably)
+	printf("%i--\n", philo->num);
+	i = philo->num - 1;
+	pthread_mutex_lock(&philo->params->forks[i]); //THIS IS NOT THE CORRECT LOCK (probably)
 	printf("%lu %i has taken rfork\n", my_time(), philo->num);
 	philo->status = EATING;
 	pthread_mutex_unlock(&philo->lock);
@@ -38,7 +39,7 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 
 	if (argc != 5 && argc != 6)
 		return (write(2, "Invalid params", 14), 1);
-	i = 1;
+	i = 0;
 	initial = init_params(argv, argc);
 	init_philos(&initial);
 	if (initial.ttdie < 1 || initial.tteat < 1 || \
@@ -49,20 +50,25 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 	initial.forks = malloc(initial.num * sizeof(pthread_mutex_t));
 	initial.starttime = my_time();
 	printf("start time = %lu\n", initial.starttime);
-	while (i <= initial.num)
+	while (i++ < initial.num)
+		initial.philos[i].params = &initial;
+	printf("%p||\n", (void *)initial.philos[0].params);
+	printf("%p||\n", (void *)&initial);
+	i = 0;
+	while (i < initial.num)
 	{
+		printf("%i||\n", initial.philos[i].params->num);
 		initial.philos[i].tid = malloc(sizeof(pthread_t));
-		pthread_mutex_init(&initial.philos[i].lock, NULL); //if that is not the correct lock, this won't either (probably xd)
+		pthread_mutex_init(&initial.forks[i], NULL);
 		pthread_create(&initial.philos[i].tid, NULL, &cycle, &initial.philos[i]);
 		i++;
 	}
-	i = 1;
+	i = 0;
 	while (i <= initial.num)
 	{
 		pthread_join(initial.philos[i].tid, NULL);
 		pthread_mutex_destroy(&initial.philos[i].lock);
 		i++;
 	}
-	free (initial.philos);
 	return (0);
 }
