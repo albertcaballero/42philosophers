@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/09 16:27:50 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/10 03:43:24 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_params
 }	t_params;
 
 int			ft_atoi(const char *str);
-t_params	init_params(char **argv, int argc);
+void		init_params(char **argv, int argc, t_params *params);
 void		init_philos(t_params *params);
 unsigned long	my_time(void);
 
