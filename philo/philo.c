@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/10 04:05:40 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/11 11:25:06 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ void	*cycle(void *void_philo)
 	t_philos	*philo;
 
 	philo = (t_philos *) void_philo;
-	printf("%i--\n", philo->num);
 	i = philo->num - 1;
-	pthread_mutex_lock(&philo->params->forks[i]); //THIS IS NOT THE CORRECT LOCK (probably)
-	printf("%lu %i has taken rfork\n", my_time(), philo->num);
-	philo->status = EATING;
-	pthread_mutex_unlock(&philo->params->forks[i]);
-	printf("%lu %i is sleeping\n", my_time(), philo->num);
-	philo->status = SLEEPING;
-	usleep(philo->ttsleep);
-	printf("%lu %i is thinking\n", my_time(), philo->num);
-	philo->status = THINKING;
+	while (check_dead(philo) != DEAD && check_finished(philo) != FINISHED)
+	{
+		pthread_mutex_lock(&philo->lock);
+		printf("%lu %i has taken rfork\n", my_time() - philo->params->starttime, philo->num);
+		philo->status = EATING;
+		philo->tlastmeal = my_time() - philo->params->starttime;
+		pthread_mutex_unlock(&philo->lock);
+		printf("%lu %i is sleeping\n", my_time() - philo->params->starttime, philo->num);
+		philo->status = SLEEPING;
+		usleep(philo->ttsleep);
+		printf("%lu %i is thinking\n", my_time() - philo->params->starttime, philo->num);
+		philo->status = THINKING;
+	}
 	return (NULL);
 }
 
@@ -38,12 +41,12 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 	int			i;
 
 	if (argc != 5 && argc != 6)
-		return (write(2, "Invalid params", 14), 1);
+		return (write(2, "Invalid param count", 19), 1);
 	i = 0;
 	init_params(argv, argc, &params);
 	init_philos(&params);
 	if (params.ttdie < 1 || params.tteat < 1 || \
-			params.ttsleep < 1 || params.eatcount < 1)
+			params.ttsleep < 1)
 		return (write(2, "Invalid params", 14), 1);
 	if (params.num > 200 || params.num < 1)
 		return (write(2, "Wrong philo count", 17), 1);
@@ -59,7 +62,7 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 	while (i <= params.num)
 	{
 		pthread_join(params.philos[i].tid, NULL);
-		pthread_mutex_destroy(&params.philos[i].lock);
+		//pthread_mutex_destroy(&params.philos[i].lock);
 		i++;
 	}
 	return (0);

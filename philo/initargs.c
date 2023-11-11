@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initargs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/10 04:04:11 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/11 11:09:27 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	init_params(char **argv, int argc, t_params *params)
 	params->ttdie = ft_atoi(argv[2]);
 	params->tteat = ft_atoi(argv[3]);
 	params->ttsleep = ft_atoi(argv[4]);
-	params->eatcount = -1;
+	params->eatmax = -1;
 	if (argc == 6)
-		params->eatcount = ft_atoi(argv[5]);
+		params->eatmax = ft_atoi(argv[5]);
 	pthread_mutex_init(&params->lock, NULL);
 }
 
@@ -38,6 +38,7 @@ void	init_philos(t_params *params)
 		params->philos[i].ttsleep = params->ttsleep;
 		params->philos[i].eatcount = 0;
 		params->philos[i].params = params;
+		pthread_mutex_init(&params->philos[i].lock, NULL);
 		i++;
 	}
 	params->forks = malloc(sizeof(pthread_mutex_t) * params->num);

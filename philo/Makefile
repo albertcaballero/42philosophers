@@ -11,7 +11,7 @@ PURPLE  =   \033[38;5;93m
 PINK	=	\033[38;5;219m
 NC      =   \033[0m
 
-SRC = philo.c initargs.c utils.c
+SRC = philo.c initargs.c utils.c checks.c
 HEADERS = includes
 DIR_O = temp
 
