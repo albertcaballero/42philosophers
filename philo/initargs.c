@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 11:09:27 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/11 19:18:28 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void	init_philos(t_params *params)
 		params->philos[i].ttsleep = params->ttsleep;
 		params->philos[i].eatcount = 0;
 		params->philos[i].params = params;
+		params->philos[i].rfork_ix = i;
+		params->philos[i].lfork_ix = i + 1;
+		if (params->philos[i].num == params->num)
+			params->philos[i].lfork_ix = 0;
 		pthread_mutex_init(&params->philos[i].lock, NULL);
 		i++;
 	}

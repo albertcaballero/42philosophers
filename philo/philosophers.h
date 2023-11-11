@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 15:56:26 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/11 19:59:06 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_ph
 	unsigned long	tlastmeal;
 	int				rfork_ix;
 	int				lfork_ix;
-	pthread_mutex_t	lock;
 }	t_philos;
 
 typedef struct s_params
@@ -55,7 +54,7 @@ typedef struct s_params
 	int				eatmax;
 	unsigned long	starttime;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	lock;
+	pthread_mutex_t	msg;
 }	t_params;
 
 /* PHILO.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/

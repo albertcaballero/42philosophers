@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 12:43:42 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/11 19:31:16 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,23 @@ void	*cycle(void *void_philo)
 
 	philo = (t_philos *) void_philo;
 	i = philo->num - 1;
+	if (philo->num != 1)
+		my_sleep(10);
+	//hay  gente que pone los pares a pensar ahora
 	while (check_dead(philo) != DEAD && check_finished(philo) != FINISHED)
 	{
-		pthread_mutex_lock(&philo->lock);
+		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
 		printf("%lu %i has taken rfork\n", my_time() - philo->params->starttime, philo->num);
+		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
+		printf("%lu %i has taken lfork\n", my_time() - philo->params->starttime, philo->num);
+		printf("%lu %i is eating\n", my_time() - philo->params->starttime, philo->num);
 		philo->status = EATING;
 		philo->tlastmeal = my_time() - philo->params->starttime;
-		pthread_mutex_unlock(&philo->lock);
+		pthread_mutex_unlock(&philo->params->forks[philo->rfork_ix]);
+		pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
 		printf("%lu %i is sleeping\n", my_time() - philo->params->starttime, philo->num);
 		philo->status = SLEEPING;
-		usleep(philo->ttsleep);
+		my_sleep(philo->ttsleep);
 		printf("%lu %i is thinking\n", my_time() - philo->params->starttime, philo->num);
 		philo->status = THINKING;
 	}
@@ -62,7 +69,7 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 	while (i <= params.num)
 	{
 		pthread_join(params.philos[i].tid, NULL);
-		//pthread_mutex_destroy(&params.philos[i].lock);
+		pthread_mutex_destroy(&params.forks[i]);
 		i++;
 	}
 	return (0);
