@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 19:31:16 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:11:09 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	*cycle(void *void_philo)
 {
-	int			i;
 	t_philos	*philo;
 
 	philo = (t_philos *) void_philo;
-	i = philo->num - 1;
 	if (philo->num != 1)
 		my_sleep(10);
 	//hay  gente que pone los pares a pensar ahora
@@ -30,14 +28,12 @@ void	*cycle(void *void_philo)
 		printf("%lu %i has taken lfork\n", my_time() - philo->params->starttime, philo->num);
 		printf("%lu %i is eating\n", my_time() - philo->params->starttime, philo->num);
 		philo->status = EATING;
+		my_sleep(philo->params->tteat);
 		philo->tlastmeal = my_time() - philo->params->starttime;
 		pthread_mutex_unlock(&philo->params->forks[philo->rfork_ix]);
 		pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
-		printf("%lu %i is sleeping\n", my_time() - philo->params->starttime, philo->num);
-		philo->status = SLEEPING;
-		my_sleep(philo->ttsleep);
-		printf("%lu %i is thinking\n", my_time() - philo->params->starttime, philo->num);
-		philo->status = THINKING;
+		act_sleep(&philo);
+		act_think(&philo);
 	}
 	return (NULL);
 }
@@ -58,7 +54,6 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 	if (params.num > 200 || params.num < 1)
 		return (write(2, "Wrong philo count", 17), 1);
 	params.starttime = my_time();
-	printf("start time = %lu\n", params.starttime);
 	i = 0;
 	while (i < params.num)
 	{

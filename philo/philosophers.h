@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 19:59:06 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:11:54 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ typedef struct s_ph
 	pthread_t		tid;
 	int				num;
 	int				status;
-	int				ttdie;
-	int				tteat;
-	int				ttsleep;
+	unsigned long	ttdie;
 	int				eatcount;
 	unsigned long	tlastmeal;
 	int				rfork_ix;
@@ -54,7 +52,7 @@ typedef struct s_params
 	int				eatmax;
 	unsigned long	starttime;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	msg;
+	pthread_mutex_t	msg_mtx;
 }	t_params;
 
 /* PHILO.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
@@ -72,5 +70,10 @@ void			init_philos(t_params *params);
 /* CHECKS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 int				check_dead(t_philos *philo);
 int				check_finished(t_philos *philo);
+
+/* ACTIONS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
+void			act_think(t_philos *philo);
+void			act_sleep(t_philos *philo);
+void			act_eat(t_philos *philo);
 
 #endif

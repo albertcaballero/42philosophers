@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initargs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 19:18:28 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/11 22:58:01 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_params(char **argv, int argc, t_params *params)
 	params->eatmax = -1;
 	if (argc == 6)
 		params->eatmax = ft_atoi(argv[5]);
-	pthread_mutex_init(&params->lock, NULL);
+	pthread_mutex_init(&params->msg, NULL);
 }
 
 void	init_philos(t_params *params)
