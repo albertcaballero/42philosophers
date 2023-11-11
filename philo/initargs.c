@@ -6,7 +6,7 @@
 /*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 22:58:01 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/11 23:48:46 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_params(char **argv, int argc, t_params *params)
 	params->eatmax = -1;
 	if (argc == 6)
 		params->eatmax = ft_atoi(argv[5]);
-	pthread_mutex_init(&params->msg, NULL);
+	pthread_mutex_init(&params->msg_mtx, NULL);
 }
 
 void	init_philos(t_params *params)
@@ -34,15 +34,12 @@ void	init_philos(t_params *params)
 	{
 		params->philos[i].num = i + 1;
 		params->philos[i].ttdie = params->ttdie;
-		params->philos[i].tteat = params->tteat;
-		params->philos[i].ttsleep = params->ttsleep;
 		params->philos[i].eatcount = 0;
 		params->philos[i].params = params;
 		params->philos[i].rfork_ix = i;
 		params->philos[i].lfork_ix = i + 1;
 		if (params->philos[i].num == params->num)
 			params->philos[i].lfork_ix = 0;
-		pthread_mutex_init(&params->philos[i].lock, NULL);
 		i++;
 	}
 	params->forks = malloc(sizeof(pthread_mutex_t) * params->num);

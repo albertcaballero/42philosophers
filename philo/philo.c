@@ -6,7 +6,7 @@
 /*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 23:11:09 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/11 23:55:36 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,15 @@ void	*cycle(void *void_philo)
 	return (NULL);
 }
 
-int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
+int	main(int argc, char **argv)
 {
 	t_params	params;
 	int			i;
 
-	if (argc != 5 && argc != 6)
-		return (write(2, "Invalid param count", 19), 1);
-	i = 0;
+	if (check_input(argc, argv) == -1)
+		return (write(2, "Invalid params", 14), 1);
 	init_params(argv, argc, &params);
 	init_philos(&params);
-	if (params.ttdie < 1 || params.tteat < 1 || \
-			params.ttsleep < 1)
-		return (write(2, "Invalid params", 14), 1);
-	if (params.num > 200 || params.num < 1)
-		return (write(2, "Wrong philo count", 17), 1);
 	params.starttime = my_time();
 	i = 0;
 	while (i < params.num)
@@ -61,7 +55,7 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 		i++;
 	}
 	i = 0;
-	while (i <= params.num)
+	while (i < params.num)
 	{
 		pthread_join(params.philos[i].tid, NULL);
 		pthread_mutex_destroy(&params.forks[i]);
@@ -69,3 +63,5 @@ int	main(int argc, char **argv) //https://github.com/TommyJD93/Philosophers
 	}
 	return (0);
 }
+
+//https://github.com/TommyJD93/Philosophers

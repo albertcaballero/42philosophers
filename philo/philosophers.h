@@ -6,7 +6,7 @@
 /*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 23:11:54 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/11 23:34:57 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,8 @@ int				check_finished(t_philos *philo);
 void			act_think(t_philos *philo);
 void			act_sleep(t_philos *philo);
 void			act_eat(t_philos *philo);
+
+/* PARSEARGS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
+int				check_input(int argc, char **argv);
 
 #endif
