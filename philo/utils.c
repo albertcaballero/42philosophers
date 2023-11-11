@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:49:21 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 11:26:42 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/11 15:56:00 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,13 @@ unsigned long	my_time(void)
 	if (gettimeofday(&abstime, NULL) == -1)
 		return (write(2, "ERROR getting time", 18));
 	return ((abstime.tv_sec * (u_int64_t)1000) + (abstime.tv_usec / 1000));
+}
+
+void	my_sleep(useconds_t time)
+{
+	u_int64_t	start;
+
+	start = my_time();
+	while ((my_time() - start) < time)
+		usleep(time / 10);
 }
