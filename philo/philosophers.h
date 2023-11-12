@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 23:34:57 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/12 19:41:51 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_params
 {
 	t_philos		*philos;
 	int				num;
+	int				death;
+	pthread_mutex_t	death_mtx;
 	unsigned long	ttdie;
 	int				tteat;
 	int				ttsleep;
