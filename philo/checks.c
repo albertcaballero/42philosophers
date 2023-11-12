@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 14:52:34 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/12 16:44:53 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_dead(t_philos *philo)
 {
-	if (philo->tlastmeal > philo->params->ttdie)
+	if (philo->tlastmeal > philo->params->ttdie && philo->status != EATING)
 	{
 		philo->status = DEAD;
 		printf("%lu %i Died\n", my_time() - philo->params->starttime, philo->num);

@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parseargs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 23:29:34 by albert            #+#    #+#             */
-/*   Updated: 2023/11/11 23:44:54 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/12 16:06:31 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_isdigit(int c)
+{
+	if (c < 48 || c > 57)
+		return (0);
+	return (1);
+}
 
 int	input_isnum(char *input)
 {
@@ -32,7 +39,7 @@ int	check_input(int argc, char **argv)
 {
 	int	i;
 
-	if (argc != 5 || argc != 6)
+	if (argc != 5 && argc != 6)
 		return (-1);
 	i = 1;
 	while (i < argc)
@@ -45,4 +52,5 @@ int	check_input(int argc, char **argv)
 	if (argc == 6)
 		if (ft_atoi(argv[5]) < 1)
 			return (-1);
+	return (0);
 }
