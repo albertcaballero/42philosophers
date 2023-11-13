@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/12 19:41:51 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:18:52 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 # define THINKING 2
 # define FINISHED 4
 # define DEAD 5
+
+/* TIME FLAGS -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=*/
+# define NOW 1
+# define LMEAL 2
+
 
 struct	s_params;
 
@@ -72,6 +77,7 @@ void			init_philos(t_params *params);
 /* CHECKS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 int				check_dead(t_philos *philo);
 int				check_finished(t_philos *philo);
+unsigned long	calc_reltime(t_philos *philo, int flag);
 
 /* ACTIONS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 void			act_think(t_philos *philo);

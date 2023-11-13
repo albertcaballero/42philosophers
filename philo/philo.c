@@ -6,7 +6,7 @@
 /*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 19:09:51 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/13 20:21:46 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	*cycle(void *void_philo)
 		if (philo->params->death == DEAD)
 			break ;
 		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
-		printf("%lu %i has taken rfork\n", my_time() - philo->params->starttime, philo->num);
+		printf("%lu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
 		if (philo->params->death == DEAD)
 			break ;
-		printf("%lu %i has taken lfork\n", my_time() - philo->params->starttime, philo->num);
-		printf("%lu %i is eating\n", my_time() - philo->params->starttime, philo->num);
+		printf("%lu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
+		printf("%lu %i is eating\n", calc_reltime(philo, NOW), philo->num);
 		philo->status = EATING;
 		my_sleep(philo->params->tteat);
-		philo->tlastmeal = my_time() - philo->params->starttime;
+		philo->tlastmeal = calc_reltime(philo, NOW);
 		pthread_mutex_unlock(&philo->params->forks[philo->rfork_ix]);
 		pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
 		if (philo->params->death == DEAD)
@@ -82,8 +82,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i < params.num)
 	{
-		printf("infinito\n"); //bucle infinito
-		pthread_join(params.philos[i].tid, NULL);
+		pthread_join(params.philos[i].tid, NULL); //bucle infinito
 		pthread_mutex_destroy(&params.forks[i]);
 		i++;
 	}
