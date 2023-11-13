@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 13:48:43 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:09:51 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	*cycle(void *void_philo)
 		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
 		printf("%lu %i has taken rfork\n", my_time() - philo->params->starttime, philo->num);
 		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
+		if (philo->params->death == DEAD)
+			break ;
 		printf("%lu %i has taken lfork\n", my_time() - philo->params->starttime, philo->num);
 		printf("%lu %i is eating\n", my_time() - philo->params->starttime, philo->num);
 		philo->status = EATING;
@@ -34,6 +36,8 @@ void	*cycle(void *void_philo)
 		philo->tlastmeal = my_time() - philo->params->starttime;
 		pthread_mutex_unlock(&philo->params->forks[philo->rfork_ix]);
 		pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
+		if (philo->params->death == DEAD)
+			break ;
 		act_sleep(philo);
 		act_think(philo);
 	}
@@ -44,11 +48,15 @@ void	architect(t_params *params)
 {
 	int	i;
 
-	i = params->num - 1;
+	i = 0;
 	while (params->death != DEAD)
 	{
-		//if (check_dead(&params->philos[i]) == DEAD) //segfaults :)
-		//	break ; //pause all threads
+		if (i > params->num - 1)
+			i = 0;
+		my_sleep(10);
+		check_dead(&params->philos[i]);
+		if (params->death == DEAD)
+			break ;
 		i++;
 	}
 }
@@ -74,33 +82,16 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i < params.num)
 	{
+		printf("infinito\n"); //bucle infinito
 		pthread_join(params.philos[i].tid, NULL);
 		pthread_mutex_destroy(&params.forks[i]);
 		i++;
 	}
 	return (0);
-}
+} //FLAGS ARE COMMENTED ON MAKEFILE
 
 //https://github.com/TommyJD93/Philosophers
 //SHOULD I USE THE SUPERVISOR? How does he stop the other threads?
 //How do i constantly check if someone died (even in their sleep)?
 	//how do i do it fast enough so that the supervisor can stop all threads before they do smth?
 //should i start with my half of the philos on a delay?
-
-/*
-./philo 2 1 1200 50
-0 1 has taken rfork
-0 1 has taken lfork
-0 1 is eating
-1200 1 is sleeping - he should've died right after starting sleeping
-1200 2 has taken rfork
-1200 2 has taken lfork
-1200 2 is eating
-1250 1 is thinking - it is always printed
-1250 1 Died
-2400 2 is sleeping - same here
-2450 2 is thinking - same here
-2450 2 Died
-*/
-//with only 1 philo it loops infinitely because it cannot lock the 2nd fork
-	//(it is being considered the same as the first)

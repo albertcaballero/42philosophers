@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 11:07:02 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:07:12 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_dead(t_philos *philo)
 	if (philo->tlastmeal > philo->params->ttdie && philo->status != EATING) //studpid comparison
 	{ //tlastmeal is abstime, ttdie is reltime you cannot compare them :)
 		philo->status = DEAD;
+		if (philo->params->death == DEAD)
+			return(0);
 		pthread_mutex_lock(&philo->params->death_mtx);
 		printf("%lu %i Died\n", my_time() - philo->params->starttime, philo->num);
 		philo->params->death = DEAD;
