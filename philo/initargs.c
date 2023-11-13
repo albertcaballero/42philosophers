@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initargs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 23:48:46 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/13 10:54:08 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_philos(t_params *params)
 		params->philos[i].params = params;
 		params->philos[i].rfork_ix = i;
 		params->philos[i].lfork_ix = i + 1;
+		params->philos[i].tlastmeal = 0;
 		if (params->philos[i].num == params->num)
 			params->philos[i].lfork_ix = 0;
 		i++;
