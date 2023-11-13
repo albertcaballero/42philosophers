@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 12:28:07 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:48:43 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,23 @@ void	*cycle(void *void_philo)
 	return (NULL);
 }
 
+void	architect(t_params *params)
+{
+	int	i;
+
+	i = params->num - 1;
+	while (params->death != DEAD)
+	{
+		//if (check_dead(&params->philos[i]) == DEAD) //segfaults :)
+		//	break ; //pause all threads
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_params	params;
 	int			i;
-	pthread_t	arch;
 
 	if (check_input(argc, argv) == -1)
 		return (write(2, "Invalid params", 14), 1);
@@ -53,14 +65,13 @@ int	main(int argc, char **argv)
 	params.starttime = my_time();
 	params.death = THINKING;
 	i = 0;
-	// pthread_create(&arch, NULL, &cycle, );
 	while (i < params.num)
 	{
 		pthread_create(&params.philos[i].tid, NULL, &cycle, &params.philos[i]);
 		i++;
 	}
+	architect(&params);
 	i = 0;
-	// pthread_join(arch, NULL);
 	while (i < params.num)
 	{
 		pthread_join(params.philos[i].tid, NULL);
