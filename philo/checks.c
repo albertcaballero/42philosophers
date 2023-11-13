@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 10:58:47 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:07:02 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_dead(t_philos *philo)
 {
-	if (philo->tlastmeal > philo->params->ttdie && philo->status != EATING)
-	{
+	if (philo->tlastmeal > philo->params->ttdie && philo->status != EATING) //studpid comparison
+	{ //tlastmeal is abstime, ttdie is reltime you cannot compare them :)
 		philo->status = DEAD;
 		pthread_mutex_lock(&philo->params->death_mtx);
 		printf("%lu %i Died\n", my_time() - philo->params->starttime, philo->num);
