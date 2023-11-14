@@ -6,7 +6,7 @@
 /*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 20:21:46 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/14 09:38:13 by albert           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 } //FLAGS ARE COMMENTED ON MAKEFILE
+//falta Supervisor whenever we have 6 params
+//todos cogen rfork entonces nadie tiene lfork (por eso se ponen los pares a dormir)
+//creo que no estan muriendo si tienen un tenedor
 
 //https://github.com/TommyJD93/Philosophers
-//SHOULD I USE THE SUPERVISOR? How does he stop the other threads?
-//How do i constantly check if someone died (even in their sleep)?
-	//how do i do it fast enough so that the supervisor can stop all threads before they do smth?
 //should i start with my half of the philos on a delay?
