@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 13:46:28 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:20:03 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_params(char **argv, int argc, t_params *params)
 	params->tteat = ft_atoi(argv[3]);
 	params->ttsleep = ft_atoi(argv[4]);
 	params->eatmax = -1;
+	params->finished = 0;
 	if (argc == 6)
 		params->eatmax = ft_atoi(argv[5]);
 	pthread_mutex_init(&params->msg_mtx, NULL);

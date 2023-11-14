@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/14 13:38:59 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:19:01 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_params
 	int				num;
 	int				death;
 	pthread_mutex_t	death_mtx;
+	int				finished;
 	unsigned long	ttdie;
 	int				tteat;
 	int				ttsleep;

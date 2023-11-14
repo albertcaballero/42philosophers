@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/14 13:40:38 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:32:31 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,12 @@ void	*cycle(void *void_philo)
 	return (NULL);
 }
 
-void	deceptor(t_params *params)
-{
-	
-}
-
 void	demiurge(t_params *params)
 {
 	int	i;
 
 	i = 0;
-	while (params->death != DEAD)
+	while (params->death != DEAD && params->finished != params->num)
 	{
 		if (i > params->num - 1)
 			i = 0;
@@ -60,7 +55,12 @@ void	demiurge(t_params *params)
 		if (params->death == DEAD)
 			break ;
 		if (params->eatmax > 0)
-			deceptor(params);
+		{
+			if (check_finished(&params->philos[i]))
+				params->finished++;
+			if (params->finished == params->num)
+				break ;
+		}
 		i++;
 	}
 }
@@ -94,5 +94,6 @@ int	main(int argc, char **argv)
 	return (0);
 } //FLAGS ARE COMMENTED ON MAKEFILE
 //falta Supervisor whenever we have 6 params
+//when someone dies they're not unlocking mutexes
 
 //https://github.com/TommyJD93/Philosophers
