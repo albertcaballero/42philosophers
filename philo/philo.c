@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/14 09:38:13 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:40:38 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void	*cycle(void *void_philo)
 	t_philos	*philo;
 
 	philo = (t_philos *) void_philo;
-	if (philo->num != 1)
-		my_sleep(10);
-	//hay  gente que pone los pares a pensar ahora
 	while (check_dead(philo) != DEAD && check_finished(philo) != FINISHED)
 	{
 		if (philo->params->death == DEAD)
@@ -44,7 +41,12 @@ void	*cycle(void *void_philo)
 	return (NULL);
 }
 
-void	architect(t_params *params)
+void	deceptor(t_params *params)
+{
+	
+}
+
+void	demiurge(t_params *params)
 {
 	int	i;
 
@@ -57,6 +59,8 @@ void	architect(t_params *params)
 		check_dead(&params->philos[i]);
 		if (params->death == DEAD)
 			break ;
+		if (params->eatmax > 0)
+			deceptor(params);
 		i++;
 	}
 }
@@ -76,9 +80,10 @@ int	main(int argc, char **argv)
 	while (i < params.num)
 	{
 		pthread_create(&params.philos[i].tid, NULL, &cycle, &params.philos[i]);
+		my_sleep(10);
 		i++;
 	}
-	architect(&params);
+	demiurge(&params);
 	i = 0;
 	while (i < params.num)
 	{
@@ -89,8 +94,5 @@ int	main(int argc, char **argv)
 	return (0);
 } //FLAGS ARE COMMENTED ON MAKEFILE
 //falta Supervisor whenever we have 6 params
-//todos cogen rfork entonces nadie tiene lfork (por eso se ponen los pares a dormir)
-//creo que no estan muriendo si tienen un tenedor
 
 //https://github.com/TommyJD93/Philosophers
-//should i start with my half of the philos on a delay?

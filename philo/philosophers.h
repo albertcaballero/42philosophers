@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 20:18:52 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:38:59 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_params
 
 /* PHILO.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 void			*cycle(void *void_philo);
+void			demiurge(t_params *params);
 
 /* UTILS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 unsigned long	my_time(void);
