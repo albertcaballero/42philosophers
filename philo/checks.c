@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/13 20:18:44 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/15 13:38:14 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ unsigned long	calc_reltime(t_philos *philo, int flag)
 
 int	check_dead(t_philos *philo)
 {
+	pthread_mutex_lock(&philo->params->death_mtx);
 	if (calc_reltime(philo, LMEAL) > philo->params->ttdie && philo->status != EATING)
 	{
 		philo->status = DEAD;
 		if (philo->params->death == DEAD)
 			return(0);
-		pthread_mutex_lock(&philo->params->death_mtx);
 		printf("%lu %i Died\n", my_time() - philo->params->starttime, philo->num);
 		philo->params->death = DEAD;
 		pthread_mutex_unlock(&philo->params->death_mtx);
