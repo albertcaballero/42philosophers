@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/14 15:32:31 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:47:55 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i < params.num)
 	{
-		pthread_join(params.philos[i].tid, NULL); //bucle infinito
+		pthread_join(params.philos[i].tid, NULL); //bucle infinito (sometimes)
 		pthread_mutex_destroy(&params.forks[i]);
 		i++;
 	}
@@ -95,5 +95,6 @@ int	main(int argc, char **argv)
 } //FLAGS ARE COMMENTED ON MAKEFILE
 //falta Supervisor whenever we have 6 params
 //when someone dies they're not unlocking mutexes
+//you have a lot of data races, a freaking lot
 
 //https://github.com/TommyJD93/Philosophers
