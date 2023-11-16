@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/15 13:38:14 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:47:59 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ int	check_dead(t_philos *philo)
 	{
 		philo->status = DEAD;
 		if (philo->params->death == DEAD)
-			return(0);
+		{
+			pthread_mutex_unlock(&philo->params->death_mtx);
+			return (0);
+		}
 		printf("%lu %i Died\n", my_time() - philo->params->starttime, philo->num);
-		philo->params->death = DEAD;
+		philo->params->death = DEAD; //datarace
 		pthread_mutex_unlock(&philo->params->death_mtx);
 		return (DEAD);
 	}
+	pthread_mutex_unlock(&philo->params->death_mtx);
 	return (0);
 }
 
