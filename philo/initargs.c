@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/14 15:20:03 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:51:00 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_params(char **argv, int argc, t_params *params)
 	if (argc == 6)
 		params->eatmax = ft_atoi(argv[5]);
 	pthread_mutex_init(&params->msg_mtx, NULL);
+	pthread_mutex_init(&params->death_mtx, NULL);
+	pthread_mutex_init(&params->time_mtx, NULL);
 }
 
 void	init_philos(t_params *params)

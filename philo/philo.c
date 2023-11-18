@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/15 10:47:55 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:54:56 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,24 @@ void	*cycle(void *void_philo)
 			break ;
 		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
 		printf("%lu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
-		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
+		pthread_mutex_lock(&philo->params->death_mtx);
 		if (philo->params->death == DEAD)
 			break ;
+		pthread_mutex_unlock(&philo->params->death_mtx);
+		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
 		printf("%lu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
 		printf("%lu %i is eating\n", calc_reltime(philo, NOW), philo->num);
 		philo->status = EATING;
 		my_sleep(philo->params->tteat);
+		pthread_mutex_lock(&philo->params->time_mtx);
 		philo->tlastmeal = calc_reltime(philo, NOW);
+		pthread_mutex_unlock(&philo->params->time_mtx);
 		pthread_mutex_unlock(&philo->params->forks[philo->rfork_ix]);
 		pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
+		pthread_mutex_lock(&philo->params->death_mtx);
 		if (philo->params->death == DEAD)
 			break ;
+		pthread_mutex_unlock(&philo->params->death_mtx);
 		act_sleep(philo);
 		act_think(philo);
 	}
@@ -50,10 +56,10 @@ void	demiurge(t_params *params)
 	{
 		if (i > params->num - 1)
 			i = 0;
-		my_sleep(10);
+		// my_sleep(10);
 		check_dead(&params->philos[i]);
-		if (params->death == DEAD)
-			break ;
+		// if (params->death == DEAD)
+		// 	break ;
 		if (params->eatmax > 0)
 		{
 			if (check_finished(&params->philos[i]))
