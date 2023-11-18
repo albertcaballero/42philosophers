@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/18 17:15:34 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/18 20:01:18 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,23 @@ void	*cycle(void *void_philo)
 	t_philos	*philo;
 
 	philo = (t_philos *) void_philo;
-	while (check_dead(philo) != DEAD && check_finished(philo) != FINISHED)
+	while (philo->params->death != DEAD && check_finished(philo) != FINISHED)
 	{
 		pthread_mutex_lock(&philo->params->death_mtx);
 		if (philo->params->death == DEAD)
+		{
+			pthread_mutex_unlock(&philo->params->death_mtx);
 			break ;
+		}
 		pthread_mutex_unlock(&philo->params->death_mtx);
-
 		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
 		printf("%lu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
 
 		pthread_mutex_lock(&philo->params->death_mtx);
-		if (philo->params->death == DEAD)
+		if (philo->params->death == DEAD){
+			pthread_mutex_unlock(&philo->params->death_mtx);
 			break ;
+		}
 		pthread_mutex_unlock(&philo->params->death_mtx);
 
 		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
@@ -46,7 +50,10 @@ void	*cycle(void *void_philo)
 		pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
 		pthread_mutex_lock(&philo->params->death_mtx);
 		if (philo->params->death == DEAD)
+		{
+			pthread_mutex_unlock(&philo->params->death_mtx);
 			break ;
+		}
 		pthread_mutex_unlock(&philo->params->death_mtx);
 		act_sleep(philo);
 		act_think(philo);
@@ -63,9 +70,12 @@ void	demiurge(t_params *params)
 	{
 		if (i > params->num - 1)
 			i = 0;
+		pthread_mutex_lock(&params->death_mtx);
 		check_dead(&params->philos[i]);
-		// if (params->death == DEAD)
-		// 	break ;
+		if (params->death == DEAD)
+			while (i++ < params->num - 1)
+				params->philos[i].status = DEAD;
+		pthread_mutex_unlock(&params->death_mtx);
 		if (params->eatmax > 0)
 		{
 			if (check_finished(&params->philos[i]))
