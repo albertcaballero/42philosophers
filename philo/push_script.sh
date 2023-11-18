@@ -1,4 +1,4 @@
 make fclean
 git add .
-git commit -m "well done"
+git commit -m $1
 git push
