@@ -20,7 +20,7 @@ OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 all: temp $(NAME)
 
 $(NAME): $(LIBRARY) Makefile $(SRC) $(OBJS)
-	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) -fsanitize="thread" -g
+	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) #-fsanitize="thread" -g
 	@printf "${PURPLE}== PHILO COMPILED SUCCESSFULLY ==\n${NC}"
 	
 temp:

@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/18 13:55:43 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/18 17:11:05 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,18 @@ unsigned long	calc_reltime(t_philos *philo, int flag)
 
 int	check_dead(t_philos *philo)
 {
-	pthread_mutex_lock(&philo->params->death_mtx);
 	pthread_mutex_lock(&philo->params->time_mtx);
 	if (calc_reltime(philo, LMEAL) > philo->params->ttdie && philo->status != EATING)
 	{
 		pthread_mutex_unlock(&philo->params->time_mtx);
 		philo->status = DEAD;
 		if (philo->params->death == DEAD)
-		{
-			pthread_mutex_unlock(&philo->params->death_mtx);
 			return (0);
-		}
 		printf("%lu %i Died\n", my_time() - philo->params->starttime, philo->num);
 		philo->params->death = DEAD;
-		pthread_mutex_unlock(&philo->params->death_mtx);
 		return (DEAD);
 	}
 	pthread_mutex_unlock(&philo->params->time_mtx);
-	pthread_mutex_unlock(&philo->params->death_mtx);
 	return (0);
 }
 
