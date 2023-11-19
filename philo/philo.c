@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/19 18:04:42 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:50:25 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*cycle(void *void_philo)
 		}
 		pthread_mutex_unlock(&philo->params->death_mtx);
 
-		pthread_mutex_lock(&philo->params->death_mtx);
+		pthread_mutex_lock(&philo->params->death_mtx); //NEXT STEP ES PASAR ESTO A ACT_EAT
 		if (philo->params->death != DEAD)
 		{
 			pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
