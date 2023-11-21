@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/21 12:35:39 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:07:34 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*cycle(void *void_philo)
 			printf("%lu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
 			printf("%lu %i is eating\n", calc_reltime(philo, NOW), philo->num);
 			philo->status = EATING;
-			my_sleep(philo->params->tteat);xxx
+			my_sleep(philo->params->tteat);
 			pthread_mutex_lock(&philo->params->time_mtx);
 			philo->tlastmeal = calc_reltime(philo, NOW);
 			pthread_mutex_unlock(&philo->params->time_mtx);
@@ -74,7 +74,7 @@ void	demiurge(t_params *params)
 		if (i > params->num - 1)
 			i = 0;
 		pthread_mutex_lock(&params->death_mtx);
-		printf("I HAVE THE MUTEEEEX");
+		printf("----I HAVE THE MUTEEEEX\n");
 		check_dead(&params->philos[i]);
 		if (params->death == DEAD)
 		{
@@ -82,7 +82,7 @@ void	demiurge(t_params *params)
 			while (i++ < params->num)
 			{
 				params->philos[i].status = DEAD;
-				pthread_mutex_destroy(&params->forks[i]);
+				// pthread_mutex_destroy(&params->forks[i]);
 			}
 		}
 		pthread_mutex_unlock(&params->death_mtx);
