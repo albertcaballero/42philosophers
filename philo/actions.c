@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 19:26:32 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/19 18:24:34 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:32:14 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	act_sleep(t_philos *philo)
 {
 	pthread_mutex_lock(&philo->params->death_mtx);
-	if (philo->params->death != DEAD){
+	if (philo->params->death != DEAD)
+	{
 		pthread_mutex_lock(&philo->params->msg_mtx);
 		printf("%lu %i is sleeping\n", my_time() - philo->params->starttime, philo->num);
 		pthread_mutex_unlock(&philo->params->msg_mtx);
@@ -33,7 +34,8 @@ void	act_eat(t_philos *philo)
 void	act_think(t_philos *philo)
 {
 	pthread_mutex_lock(&philo->params->death_mtx);
-	if (philo->params->death != DEAD){
+	if (philo->params->death != DEAD)
+	{
 		pthread_mutex_lock(&philo->params->msg_mtx);
 		printf("%lu %i is thinking\n", my_time() - philo->params->starttime, philo->num);
 		pthread_mutex_unlock(&philo->params->msg_mtx);
