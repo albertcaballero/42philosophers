@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/21 16:41:00 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:52:03 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,3 +129,4 @@ int	main(int argc, char **argv)
 //you have a lot of data races, a freaking lot
 
 //https://github.com/TommyJD93/Philosophers
+// https://github.com/rphlr/42-Evals/blob/main/Cursus/Philosophers/img/all.jpg 
