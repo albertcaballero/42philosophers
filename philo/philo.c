@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/21 12:13:39 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:35:39 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*cycle(void *void_philo)
 			printf("%lu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
 			printf("%lu %i is eating\n", calc_reltime(philo, NOW), philo->num);
 			philo->status = EATING;
-			my_sleep(philo->params->tteat);
+			my_sleep(philo->params->tteat);xxx
 			pthread_mutex_lock(&philo->params->time_mtx);
 			philo->tlastmeal = calc_reltime(philo, NOW);
 			pthread_mutex_unlock(&philo->params->time_mtx);
