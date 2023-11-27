@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/18 12:49:09 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:19:15 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,6 @@ typedef struct s_ph
 	int				rfork_ix;
 	int				lfork_ix;
 }	t_philos;
-
-// typedef struct s_mtx
-// {
-// 	pthread_mutex_t	death_mtx;
-// 	pthread_mutex_t	msg_mtx;
-// }	t_mtx;
 
 typedef struct s_params
 {
