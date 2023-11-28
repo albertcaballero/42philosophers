@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/27 15:19:15 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:19:13 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_ph
 	pthread_t		tid;
 	int				num;
 	int				status;
+	int				finished;
 	unsigned long	ttdie;
 	int				eatcount;
 	unsigned long	tlastmeal;
@@ -53,6 +54,7 @@ typedef struct s_params
 	pthread_mutex_t	death_mtx;
 	pthread_mutex_t	msg_mtx;
 	pthread_mutex_t	time_mtx;
+	pthread_mutex_t	finish_mtx;
 	int				num;
 	int				death;
 	int				finished;
@@ -65,29 +67,35 @@ typedef struct s_params
 }	t_params;
 
 /* PHILO.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
+
 void			*cycle(void *void_philo);
 void			demiurge(t_params *params);
 
 /* UTILS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
+
 unsigned long	my_time(void);
 int				ft_atoi(const char *str);
 void			my_sleep(useconds_t time);
 
 /* INITARGS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-=--*/
+
 void			init_params(char **argv, int argc, t_params *params);
 void			init_philos(t_params *params);
 
 /* CHECKS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
+
 int				check_dead(t_philos *philo);
 int				check_finished(t_philos *philo);
 unsigned long	calc_reltime(t_philos *philo, int flag);
 
 /* ACTIONS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
+
 void			act_think(t_philos *philo);
 void			act_sleep(t_philos *philo);
 void			act_eat(t_philos *philo);
 
 /* PARSEARGS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
+
 int				check_input(int argc, char **argv);
 
 #endif

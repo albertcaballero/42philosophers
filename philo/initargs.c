@@ -6,12 +6,13 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/27 15:19:28 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:20:12 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+//initiates the main structure's parameters
 void	init_params(char **argv, int argc, t_params *params)
 {
 	params->num = ft_atoi(argv[1]);
@@ -26,8 +27,10 @@ void	init_params(char **argv, int argc, t_params *params)
 	pthread_mutex_init(&params->msg_mtx, NULL);
 	pthread_mutex_init(&params->death_mtx, NULL);
 	pthread_mutex_init(&params->time_mtx, NULL);
+	pthread_mutex_init(&params->finish_mtx, NULL);
 }
 
+//initiates all philosopher's parameters
 void	init_philos(t_params *params)
 {
 	int			i;
@@ -44,6 +47,7 @@ void	init_philos(t_params *params)
 		params->philos[i].lfork_ix = i + 1;
 		params->philos[i].tlastmeal = 0;
 		params->philos[i].status = THINKING;
+		params->philos[i].finished = !FINISHED;
 		if (params->philos[i].num == params->num)
 			params->philos[i].lfork_ix = 0;
 		i++;
