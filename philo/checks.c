@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/28 13:47:33 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:43:07 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ unsigned long	calc_reltime(t_philos *philo, int flag)
 		pthread_mutex_unlock(&philo->params->time_mtx);
 		return (currtime);
 	}
-	else if (flag == LMEAL)
-		result = currtime - philo->tlastmeal;
+	result = currtime - philo->tlastmeal;
 	pthread_mutex_unlock(&philo->params->time_mtx);
 	return (result);
 }

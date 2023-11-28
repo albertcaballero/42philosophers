@@ -1,0 +1,260 @@
+0 1 has taken rfork
+0 1 has taken lfork
+0 1 is eating
+20 3 has taken rfork
+20 3 has taken lfork
+20 3 is eating
+40 5 has taken rfork
+40 5 has taken lfork
+40 5 is eating
+60 7 has taken rfork
+60 7 has taken lfork
+60 7 is eating
+80 9 has taken rfork
+80 9 has taken lfork
+80 9 is eating
+300 2 has taken rfork
+300 1 is sleeping
+320 2 has taken lfork
+320 2 is eating
+320 3 is sleeping
+320 4 has taken rfork
+340 4 has taken lfork
+340 4 is eating
+340 6 has taken rfork
+340 5 is sleeping
+360 6 has taken lfork
+360 6 is eating
+360 8 has taken rfork
+360 7 is sleeping
+380 8 has taken lfork
+380 8 is eating
+380 10 has taken rfork
+380 9 is sleeping
+380 10 has taken lfork
+380 10 is eating
+400 1 is thinking
+420 3 is thinking
+440 5 is thinking
+460 7 is thinking
+480 9 is thinking
+620 2 is sleeping
+620 3 has taken rfork
+640 3 has taken lfork
+640 3 is eating
+640 4 is sleeping
+640 5 has taken rfork
+660 5 has taken lfork
+660 5 is eating
+660 7 has taken rfork
+660 6 is sleeping
+680 8 is sleeping
+680 9 has taken rfork
+680 7 has taken lfork
+680 7 is eating
+680 10 is sleeping
+680 1 has taken rfork
+680 9 has taken lfork
+680 9 is eating
+680 1 has taken lfork
+680 1 is eating
+720 2 is thinking
+740 4 is thinking
+760 6 is thinking
+780 8 is thinking
+780 10 is thinking
+940 4 has taken rfork
+940 3 is sleeping
+960 4 has taken lfork
+960 4 is eating
+960 6 has taken rfork
+960 5 is sleeping
+980 9 is sleeping
+980 10 has taken rfork
+980 8 has taken rfork
+980 1 is sleeping
+980 8 has taken lfork
+980 8 is eating
+980 6 has taken lfork
+980 6 is eating
+980 2 has taken rfork
+980 2 has taken lfork
+980 2 is eating
+980 7 is sleeping
+980 10 has taken lfork
+980 10 is eating
+1040 3 is thinking
+1060 5 is thinking
+1080 1 is thinking
+1080 7 is thinking
+1080 9 is thinking
+1260 5 has taken rfork
+1260 4 is sleeping
+1280 1 has taken rfork
+1280 9 has taken rfork
+1280 5 has taken lfork
+1280 5 is eating
+1280 9 has taken lfork
+1280 9 is eating
+1280 6 is sleeping
+1280 7 has taken rfork
+1280 2 is sleeping
+1280 7 has taken lfork
+1280 7 is eating
+1280 1 has taken lfork
+1280 1 is eating
+1280 8 is sleeping
+1280 3 has taken rfork
+1280 10 is sleeping
+1280 3 has taken lfork
+1280 3 is eating
+1360 4 is thinking
+1380 8 is thinking
+1380 6 is thinking
+1380 10 is thinking
+1380 2 is thinking
+1580 10 has taken rfork
+1580 4 has taken rfork
+1580 4 has taken lfork
+1580 4 is eating
+1580 2 has taken rfork
+1580 1 is sleeping
+1580 7 is sleeping
+1580 5 is sleeping
+1580 6 has taken rfork
+1580 9 is sleeping
+1580 10 has taken lfork
+1580 10 is eating
+1580 8 has taken rfork
+1580 6 has taken lfork
+1580 6 is eating
+1580 2 has taken lfork
+1580 2 is eating
+1580 8 has taken lfork
+1580 8 is eating
+1580 3 is sleeping
+1680 7 is thinking
+1680 1 is thinking
+1680 3 is thinking
+1680 5 is thinking
+1680 9 is thinking
+1880 5 has taken rfork
+1880 7 has taken rfork
+1880 8 is sleeping
+1880 7 has taken lfork
+1880 7 is eating
+1880 9 has taken rfork
+1880 5 has taken lfork
+1880 5 is eating
+1880 6 is sleeping
+1880 4 is sleeping
+1880 3 has taken rfork
+1880 3 has taken lfork
+1880 3 is eating
+1880 10 is sleeping
+1880 9 has taken lfork
+1880 9 is eating
+1880 2 is sleeping
+1880 1 has taken rfork
+1880 1 has taken lfork
+1880 1 is eating
+1980 10 is thinking
+1980 8 is thinking
+1980 2 is thinking
+1980 4 is thinking
+1980 6 is thinking
+2180 6 has taken rfork
+2180 2 has taken rfork
+2180 4 has taken rfork
+2180 2 has taken lfork
+2180 2 is eating
+2180 7 is sleeping
+2180 1 is sleeping
+2180 6 has taken lfork
+2180 6 is eating
+2180 8 has taken rfork
+2180 8 has taken lfork
+2180 8 is eating
+2180 4 has taken lfork
+2180 4 is eating
+2180 10 has taken rfork
+2180 10 has taken lfork
+2180 10 is eating
+2180 3 is sleeping
+2180 9 is sleeping
+2180 5 is sleeping
+2280 7 is thinking
+2280 9 is thinking
+2280 5 is thinking
+2280 3 is thinking
+2280 1 is thinking
+2480 8 is sleeping
+2480 2 is sleeping
+2480 1 has taken rfork
+2480 6 is sleeping
+2480 10 is sleeping
+2480 7 has taken rfork
+2480 9 has taken rfork
+2480 7 has taken lfork
+2480 7 is eating
+2480 9 has taken lfork
+2480 9 is eating
+2480 3 has taken rfork
+2480 3 has taken lfork
+2480 3 is eating
+2480 4 is sleeping
+2480 5 has taken rfork
+2480 5 has taken lfork
+2480 5 is eating
+2480 7 has finished
+2480 9 has finished
+2480 3 has finished
+2480 1 has taken lfork
+2480 1 is eating
+2480 5 has finished
+2580 4 is thinking
+2580 8 is thinking
+2580 10 is thinking
+2580 2 is thinking
+2580 6 is thinking
+2780 1 is sleeping
+2780 7 is sleeping
+2780 5 is sleeping
+2780 3 is sleeping
+2780 10 has taken rfork
+2780 9 is sleeping
+2780 4 has taken rfork
+2780 6 has taken rfork
+2780 6 has taken lfork
+2780 6 is eating
+2780 2 has taken rfork
+2780 2 has taken lfork
+2780 2 is eating
+2780 4 has taken lfork
+2780 4 is eating
+2780 10 has taken lfork
+2780 10 is eating
+2780 8 has taken rfork
+2780 8 has taken lfork
+2780 8 is eating
+2880 9 is thinking
+2880 1 is thinking
+2880 1 has finished
+2880 5 is thinking
+2880 7 is thinking
+2880 3 is thinking
+3080 2 is sleeping
+3080 10 is sleeping
+3080 6 is sleeping
+3080 8 is sleeping
+3080 4 is sleeping
+3180 4 is thinking
+3180 4 has finished
+3180 8 is thinking
+3180 10 is thinking
+3180 8 has finished
+3180 6 is thinking
+3180 2 is thinking
+3180 2 has finished
+3180 10 has finished
+3180 6 has finished

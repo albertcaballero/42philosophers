@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/28 13:48:55 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:41:30 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	demiurge(t_params *params)
 	int	i;
 
 	i = 0;
-	while (923) //params->death != DEAD && params->finished != params->num
+	while (923)
 	{
 		if (i > params->num - 1)
 			i = 0;
@@ -68,8 +68,10 @@ void	demiurge(t_params *params)
 			break ;
 		if (params->eatmax > 0)
 		{
-			if (check_finished(&params->philos[i] //&& philo->finished != finished)) 
+			if (check_finished(&params->philos[i]) == FINISHED && params->philos[i].status != DEAD)
 				params->finished++;
+			if (params->finished >= params->eatmax)
+				break ;
 		}
 		i++;
 	}
@@ -102,8 +104,7 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-//FLAGS ARE COMMENTED ON MAKEFILE
-//falta Supervisor whenever we have 6 params
+//un solo filosofo es graciosillo
 //im not checking if they die while sleeping
 
 //https://github.com/TommyJD93/Philosophers

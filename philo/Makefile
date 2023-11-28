@@ -1,6 +1,6 @@
 NAME = philo
 LIBRARY = philosophers.h
-# CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror
 CC = cc
 
 RED     =   \033[38;5;161m
