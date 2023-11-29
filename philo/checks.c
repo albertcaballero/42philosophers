@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/28 15:43:07 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:16:39 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	check_dead(t_philos *philo)
 	if (calc_reltime(philo, LMEAL) > philo->params->ttdie && philo->status != EATING)
 	{
 		philo->status = DEAD;
+		philo->params->death = DEAD;
 		pthread_mutex_lock(&philo->params->msg_mtx);
 		printf("%lu %i Died\n", calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_unlock(&philo->params->msg_mtx);
-		philo->params->death = DEAD;
 		pthread_mutex_unlock(&philo->params->death_mtx);
 		return (DEAD);
 	}

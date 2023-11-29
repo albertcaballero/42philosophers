@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albert <albert@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:49:21 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/11 23:27:10 by albert           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:03:47 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ unsigned long	my_time(void)
 	struct timeval	abstime;
 
 	if (gettimeofday(&abstime, NULL) == -1)
-		return (write(2, "ERROR getting time", 18));
+		return (write(2, "ERROR getting time", 18), -1);
 	return ((abstime.tv_sec * (u_int64_t)1000) + (abstime.tv_usec / 1000));
 }
 

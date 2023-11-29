@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/28 15:41:30 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:46:47 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,21 @@ void	*cycle(void *void_philo)
 	philo = (t_philos *) void_philo;
 	while (check_finished(philo) != FINISHED)
 	{
-		if (check_dead(philo) != DEAD)
+		if (check_dead(philo) != DEAD) //first fork
 		{
 			pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
 			pthread_mutex_lock(&philo->params->msg_mtx);
+			//before each message, check if dead again
 			printf("%lu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
 			pthread_mutex_unlock(&philo->params->msg_mtx);
 		}
 		else
 			break ;
-		if (check_dead(philo) != DEAD)
+		if (check_dead(philo) != DEAD) //second fork and eat
 		{
 			pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
 			pthread_mutex_lock(&philo->params->msg_mtx);
+			//before each message, check if dead again
 			printf("%lu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
 			printf("%lu %i is eating\n", calc_reltime(philo, NOW), philo->num);
 			pthread_mutex_unlock(&philo->params->msg_mtx);
@@ -104,7 +106,7 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-//un solo filosofo es graciosillo
+//un solo filosofo es graciosillo :)
 //im not checking if they die while sleeping
 
 //https://github.com/TommyJD93/Philosophers
