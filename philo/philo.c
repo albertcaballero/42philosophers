@@ -6,13 +6,19 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/30 16:26:36 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:47:02 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-//the cycle the threads repeat all time
+void	one_philo(t_philos *philo)
+{
+	printf("%lu %i has taken a fork\n", calc_reltime(philo, NOW), 1);
+	my_sleep(philo->params->ttdie, philo);
+	return ;
+}
+
 void	*cycle(void *void_philo)
 {
 	t_philos	*philo;
@@ -21,27 +27,23 @@ void	*cycle(void *void_philo)
 	if (philo->params->num == 1)
 	{
 		one_philo(philo);
-		return ;
+		return (NULL);
 	}
-	while (check_finished(philo) != FINISHED)
+	while (check_finished(philo) != FINISHED && check_dead(philo) != DEAD)
 	{
+		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
+		//pthread_mutex_lock(&philo->params->msg_mtx);
 		if (check_dead(philo) != DEAD)
-		{
-			pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
-			pthread_mutex_lock(&philo->params->msg_mtx);
-			if (check_dead(philo) != DEAD)
-				printf("%lu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
-			pthread_mutex_unlock(&philo->params->msg_mtx);
-		}
-		else
-			break ;
+			printf("%lu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
+		//pthread_mutex_unlock(&philo->params->msg_mtx);
+
 		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
 		if (check_dead(philo) != DEAD)
 		{
-			pthread_mutex_lock(&philo->params->msg_mtx);
+			// pthread_mutex_lock(&philo->params->msg_mtx);
 			printf("%lu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
 			printf("%lu %i is eating\n", calc_reltime(philo, NOW), philo->num);
-			pthread_mutex_unlock(&philo->params->msg_mtx);
+			// pthread_mutex_unlock(&philo->params->msg_mtx);
 		}
 		else
 		{
@@ -53,6 +55,7 @@ void	*cycle(void *void_philo)
 		philo->status = EATING;
 		my_sleep(philo->params->tteat, philo);
 		philo->tlastmeal = calc_reltime(philo, NOW);
+		philo->status = THINKING;
 		pthread_mutex_unlock(&philo->params->forks[philo->rfork_ix]);
 		pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
 		act_sleep(philo);
@@ -69,8 +72,7 @@ void	demiurge(t_params *params)
 	i = 0;
 	while (923)
 	{
-		if (i > params->num - 1)
-			i = 0;
+		i = (i <= (params->num - 1)) * i;
 		if (check_dead(&params->philos[i]) == DEAD)
 			break ;
 		if (params->eatmax > 0)

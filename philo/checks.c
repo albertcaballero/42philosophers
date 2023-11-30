@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/30 12:37:03 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:42:30 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	check_dead(t_philos *philo)
 	{
 		philo->status = DEAD;
 		philo->params->death = DEAD;
-		pthread_mutex_lock(&philo->params->msg_mtx);
+		//pthread_mutex_lock(&philo->params->msg_mtx);
 		printf("%lu %i Died\n", calc_reltime(philo, NOW), philo->num);
-		pthread_mutex_unlock(&philo->params->msg_mtx);
+		//pthread_mutex_unlock(&philo->params->msg_mtx);
 		pthread_mutex_unlock(&philo->params->death_mtx);
 		return (DEAD);
 	}
@@ -57,10 +57,10 @@ int	check_finished(t_philos *philo)
 	if (philo->params->eatmax > 0 && philo->eatcount >= philo->params->eatmax)
 	{
 		philo->finished = FINISHED;
-		pthread_mutex_lock(&philo->params->msg_mtx);
+		//pthread_mutex_lock(&philo->params->msg_mtx);
 		if (check_dead(philo) != DEAD)
 			printf("%lu %i has finished\n", calc_reltime(philo, NOW), philo->num);
-		pthread_mutex_unlock(&philo->params->msg_mtx);
+		//pthread_mutex_unlock(&philo->params->msg_mtx);
 		pthread_mutex_unlock(&philo->params->finish_mtx);
 		return (FINISHED);
 	}
