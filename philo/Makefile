@@ -12,10 +12,9 @@ PINK	=	\033[38;5;219m
 NC      =   \033[0m
 
 SRC = philo.c initargs.c utils.c checks.c actions.c parseargs.c
-HEADERS = includes
 DIR_O = temp
 
-OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
+OBJS = $(addprefix $(DIR_O)/,$(SRC:.c=.o))
 
 all: temp $(NAME)
 
@@ -24,13 +23,12 @@ $(NAME): $(LIBRARY) Makefile $(SRC) $(OBJS)
 	@printf "${PURPLE}== PHILO COMPILED SUCCESSFULLY ==\n${NC}"
 	
 temp:
-	@mkdir -p temp
+	@mkdir $(DIR_O)
 
-$(DIR_O)/%.o: %.c $(LIBRARY)
+$(DIR_O)/%.o: %.c $(LIBRARY) Makefile
 	$(CC) -I $(LIBRARY) -c -o $@ $<
 
 clean:
-	@rm -f $(OBJS)
 	@rm -rf $(DIR_O)
 
 fclean: clean

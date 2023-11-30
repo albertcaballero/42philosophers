@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/29 10:45:57 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:39:24 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			demiurge(t_params *params);
 
 unsigned long	my_time(void);
 int				ft_atoi(const char *str);
-void			my_sleep(useconds_t time);
+void			my_sleep(useconds_t time, t_philos *philo);
 
 /* INITARGS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-=--*/
 

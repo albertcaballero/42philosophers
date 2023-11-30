@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:49:21 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/29 11:03:47 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:39:02 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ unsigned long	my_time(void)
 	return ((abstime.tv_sec * (u_int64_t)1000) + (abstime.tv_usec / 1000));
 }
 
-void	my_sleep(useconds_t time)
+void	my_sleep(useconds_t time, t_philos *philo)
 {
 	u_int64_t	start;
 
 	start = my_time();
 	while ((my_time() - start) < time)
+	{
 		usleep(time / 10);
+		if (check_dead(philo) == DEAD)
+			break ;
+	}
 }

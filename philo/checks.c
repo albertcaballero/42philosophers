@@ -6,28 +6,20 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/29 11:16:39 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:37:03 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-//calculates time relative to start of program, accepts one of 2 flags (NOW || LMEAL)
 unsigned long	calc_reltime(t_philos *philo, int flag)
 {
-	unsigned long	result;
 	unsigned long	currtime;
 
 	pthread_mutex_lock(&philo->params->time_mtx);
 	currtime = my_time() - philo->params->starttime;
-	if (flag == NOW)
-	{
-		pthread_mutex_unlock(&philo->params->time_mtx);
-		return (currtime);
-	}
-	result = currtime - philo->tlastmeal;
 	pthread_mutex_unlock(&philo->params->time_mtx);
-	return (result);
+	return (currtime - ((flag == LMEAL) * philo->tlastmeal));
 }
 
 //check if any philosopher died, returns DEAD if true
@@ -66,7 +58,8 @@ int	check_finished(t_philos *philo)
 	{
 		philo->finished = FINISHED;
 		pthread_mutex_lock(&philo->params->msg_mtx);
-		printf("%lu %i has finished\n", calc_reltime(philo, NOW), philo->num);
+		if (check_dead(philo) != DEAD)
+			printf("%lu %i has finished\n", calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_unlock(&philo->params->msg_mtx);
 		pthread_mutex_unlock(&philo->params->finish_mtx);
 		return (FINISHED);
