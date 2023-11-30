@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/30 12:30:01 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:26:36 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	*cycle(void *void_philo)
 	t_philos	*philo;
 
 	philo = (t_philos *) void_philo;
+	if (philo->params->num == 1)
+	{
+		one_philo(philo);
+		return ;
+	}
 	while (check_finished(philo) != FINISHED)
 	{
 		if (check_dead(philo) != DEAD)
@@ -85,7 +90,7 @@ int	main(int argc, char **argv)
 	int			i;
 
 	if (check_input(argc, argv) == -1)
-		return (write(2, "Invalid params", 14), 1);
+		return (write(2, "Invalid params\n", 15), 1);
 	init_params(argv, argc, &params);
 	init_philos(&params);
 	params.starttime = my_time();
