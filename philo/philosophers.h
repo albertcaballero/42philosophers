@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/30 10:39:24 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 12:37:39 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void			init_philos(t_params *params);
 
 /* CHECKS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 
-int				check_dead(t_philos *philo);
+int				kill_philo(t_philos *philo);
+int				check_already_dead(t_philos *philo);
 int				check_finished(t_philos *philo);
 unsigned long	calc_reltime(t_philos *philo, int flag);
 

@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/30 18:42:30 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 12:56:01 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,26 @@ unsigned long	calc_reltime(t_philos *philo, int flag)
 	return (currtime - ((flag == LMEAL) * philo->tlastmeal));
 }
 
-//check if any philosopher died, returns DEAD if true
-int	check_dead(t_philos *philo)
+//checks if philosophers already died, returns DEAD if true
+int	check_already_dead(t_philos *philo)
+{
+	int	ret;
+
+	pthread_mutex_lock(&philo->params->death_mtx);
+	ret = philo->params->death;
+	pthread_mutex_unlock(&philo->params->death_mtx);
+	return (ret);
+}
+
+//check if any philosopher has to die... and KILLS THEM!!! returns DEAD if true
+int	kill_philo(t_philos *philo)
 {
 	pthread_mutex_lock(&philo->params->death_mtx);
-	if ((philo->params->death == DEAD || philo->status == DEAD))
-	{
-		pthread_mutex_unlock(&philo->params->death_mtx);
-		return (DEAD);
-	}
 	if (calc_reltime(philo, LMEAL) > philo->params->ttdie && philo->status != EATING)
 	{
 		philo->status = DEAD;
 		philo->params->death = DEAD;
-		//pthread_mutex_lock(&philo->params->msg_mtx);
 		printf("%lu %i Died\n", calc_reltime(philo, NOW), philo->num);
-		//pthread_mutex_unlock(&philo->params->msg_mtx);
 		pthread_mutex_unlock(&philo->params->death_mtx);
 		return (DEAD);
 	}
@@ -57,10 +61,8 @@ int	check_finished(t_philos *philo)
 	if (philo->params->eatmax > 0 && philo->eatcount >= philo->params->eatmax)
 	{
 		philo->finished = FINISHED;
-		//pthread_mutex_lock(&philo->params->msg_mtx);
-		if (check_dead(philo) != DEAD)
+		if (check_already_dead(philo) != DEAD)
 			printf("%lu %i has finished\n", calc_reltime(philo, NOW), philo->num);
-		//pthread_mutex_unlock(&philo->params->msg_mtx);
 		pthread_mutex_unlock(&philo->params->finish_mtx);
 		return (FINISHED);
 	}

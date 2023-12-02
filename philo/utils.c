@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:49:21 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/30 10:39:02 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 12:39:11 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	my_sleep(useconds_t time, t_philos *philo)
 	while ((my_time() - start) < time)
 	{
 		usleep(time / 10);
-		if (check_dead(philo) == DEAD)
+		if (check_already_dead(philo) == DEAD)
 			break ;
 	}
 }

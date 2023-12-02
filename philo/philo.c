@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/11/30 18:47:02 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 13:20:57 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,18 @@ void	*cycle(void *void_philo)
 		one_philo(philo);
 		return (NULL);
 	}
-	while (check_finished(philo) != FINISHED && check_dead(philo) != DEAD)
+	if (philo->num % 2 == 0)
+		usleep(philo->params->tteat); //hay que arreglar esto dependiendo de si ttdie es menor
+	while (check_finished(philo) != FINISHED)
 	{
 		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
-		//pthread_mutex_lock(&philo->params->msg_mtx);
-		if (check_dead(philo) != DEAD)
+		if (check_already_dead(philo) != DEAD)
 			printf("%lu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
-		//pthread_mutex_unlock(&philo->params->msg_mtx);
-
 		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
-		if (check_dead(philo) != DEAD)
+		if (check_already_dead(philo) != DEAD)
 		{
-			// pthread_mutex_lock(&philo->params->msg_mtx);
 			printf("%lu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
 			printf("%lu %i is eating\n", calc_reltime(philo, NOW), philo->num);
-			// pthread_mutex_unlock(&philo->params->msg_mtx);
 		}
 		else
 		{
@@ -73,7 +70,7 @@ void	demiurge(t_params *params)
 	while (923)
 	{
 		i = (i <= (params->num - 1)) * i;
-		if (check_dead(&params->philos[i]) == DEAD)
+		if (kill_philo(&params->philos[i]) == DEAD)
 			break ;
 		if (params->eatmax > 0)
 		{
@@ -96,11 +93,11 @@ int	main(int argc, char **argv)
 	init_params(argv, argc, &params);
 	init_philos(&params);
 	params.starttime = my_time();
+	printf("starttime = %lu\n", params.starttime);
 	i = 0;
 	while (i < params.num)
 	{
 		pthread_create(&params.philos[i].tid, NULL, &cycle, &params.philos[i]);
-		usleep(10);
 		i++;
 	}
 	demiurge(&params);
@@ -112,13 +109,10 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	pthread_mutex_destroy(&params.death_mtx);
-	pthread_mutex_destroy(&params.msg_mtx);
 	pthread_mutex_destroy(&params.finish_mtx);
 	pthread_mutex_destroy(&params.time_mtx);
 	return (0);
 }
-//un solo filosofo es graciosillo :)
-//antes de imprimir cualquier mensaje comprobar if dead
 
 //https://github.com/TommyJD93/Philosophers
 //https://github.com/rphlr/42-Evals/blob/main/Cursus/Philosophers/img/all.jpg 
