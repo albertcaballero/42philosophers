@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/02 16:34:59 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 17:08:07 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,14 @@ void	*cycle(void *void_philo)
 		return (one_philo(philo), NULL);
 	if (philo->num % 2 == 0)
 		usleep(philo->params->tteat * 1000);
-	while (check_finished(philo) != FINISHED)
+	while (923)
 	{
-		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
-		if (check_already_dead(philo) != DEAD)
-			printf("%llu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
-		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
-		if (check_already_dead(philo) != DEAD)
-		{
-			printf("%llu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
-			printf("%llu %i is eating\n", calc_reltime(philo, NOW), philo->num);
-		}
-		else
-		{
-			pthread_mutex_unlock(&philo->params->forks[philo->rfork_ix]);
-			pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
+		act_eat(philo);
+		if (check_finished(philo) == FINISHED)
 			break ;
-		}
-		philo->eatcount++;
-		philo->status = EATING;
-		my_sleep(philo->params->tteat, philo);
-		philo->tlastmeal = calc_reltime(philo, NOW);
-		philo->status = THINKING;
-		pthread_mutex_unlock(&philo->params->forks[philo->rfork_ix]);
-		pthread_mutex_unlock(&philo->params->forks[philo->lfork_ix]);
 		act_sleep(philo);
+		if (check_already_dead(philo) == DEAD)
+			break ;
 		act_think(philo);
 	}
 	return (NULL);

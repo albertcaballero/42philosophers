@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/02 13:00:39 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 16:59:31 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_params(char **argv, int argc, t_params *params)
 	params->finished = 0;
 	if (argc == 6)
 		params->eatmax = ft_atoi(argv[5]);
-	params->death = THINKING;
+	params->death = !DEAD;
 	pthread_mutex_init(&params->death_mtx, NULL);
 	pthread_mutex_init(&params->time_mtx, NULL);
 	pthread_mutex_init(&params->finish_mtx, NULL);
@@ -39,7 +39,6 @@ void	init_philos(t_params *params)
 	while (i < params->num)
 	{
 		params->philos[i].num = i + 1;
-		params->philos[i].ttdie = params->ttdie;
 		params->philos[i].eatcount = 0;
 		params->philos[i].params = params;
 		params->philos[i].rfork_ix = i;
