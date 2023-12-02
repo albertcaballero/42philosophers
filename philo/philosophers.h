@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/02 12:37:39 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 16:20:49 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ typedef struct s_ph
 	int				num;
 	int				status;
 	int				finished;
-	unsigned long	ttdie;
+	uint64_t		ttdie;
 	int				eatcount;
-	unsigned long	tlastmeal;
+	uint64_t		tlastmeal;
 	int				rfork_ix;
 	int				lfork_ix;
 }	t_philos;
@@ -57,45 +57,45 @@ typedef struct s_params
 	int				num;
 	int				death;
 	int				finished;
-	unsigned long	ttdie;
+	uint64_t		ttdie;
 	int				tteat;
 	int				ttsleep;
 	int				eatmax;
-	unsigned long	starttime;
+	uint64_t		starttime;
 	pthread_mutex_t	*forks;
 }	t_params;
 
 /* PHILO.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 
-void			*cycle(void *void_philo);
-void			demiurge(t_params *params);
+void		*cycle(void *void_philo);
+void		demiurge(t_params *params);
 
 /* UTILS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 
-unsigned long	my_time(void);
-int				ft_atoi(const char *str);
-void			my_sleep(useconds_t time, t_philos *philo);
+uint64_t	my_time(void);
+int			ft_atoi(const char *str);
+void		my_sleep(useconds_t time, t_philos *philo);
 
 /* INITARGS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-=--*/
 
-void			init_params(char **argv, int argc, t_params *params);
-void			init_philos(t_params *params);
+void		init_params(char **argv, int argc, t_params *params);
+void		init_philos(t_params *params);
 
 /* CHECKS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 
-int				kill_philo(t_philos *philo);
-int				check_already_dead(t_philos *philo);
-int				check_finished(t_philos *philo);
-unsigned long	calc_reltime(t_philos *philo, int flag);
+int			kill_philo(t_philos *philo);
+int			check_already_dead(t_philos *philo);
+int			check_finished(t_philos *philo);
+uint64_t	calc_reltime(t_philos *philo, int flag);
 
 /* ACTIONS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 
-void			act_think(t_philos *philo);
-void			act_sleep(t_philos *philo);
-void			act_eat(t_philos *philo);
+void		act_think(t_philos *philo);
+void		act_sleep(t_philos *philo);
+void		act_eat(t_philos *philo);
 
 /* PARSEARGS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 
-int				check_input(int argc, char **argv);
+int			check_input(int argc, char **argv);
 
 #endif

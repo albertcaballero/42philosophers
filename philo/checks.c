@@ -6,15 +6,15 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/02 12:56:01 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 16:17:12 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-unsigned long	calc_reltime(t_philos *philo, int flag)
+uint64_t	calc_reltime(t_philos *philo, int flag)
 {
-	unsigned long	currtime;
+	uint64_t	currtime;
 
 	pthread_mutex_lock(&philo->params->time_mtx);
 	currtime = my_time() - philo->params->starttime;
@@ -41,7 +41,7 @@ int	kill_philo(t_philos *philo)
 	{
 		philo->status = DEAD;
 		philo->params->death = DEAD;
-		printf("%lu %i Died\n", calc_reltime(philo, NOW), philo->num);
+		printf("%llu %i Died\n", calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_unlock(&philo->params->death_mtx);
 		return (DEAD);
 	}
@@ -62,7 +62,7 @@ int	check_finished(t_philos *philo)
 	{
 		philo->finished = FINISHED;
 		if (check_already_dead(philo) != DEAD)
-			printf("%lu %i has finished\n", calc_reltime(philo, NOW), philo->num);
+			printf("%llu %i has finished\n", calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_unlock(&philo->params->finish_mtx);
 		return (FINISHED);
 	}

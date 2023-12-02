@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/02 13:20:57 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/02 16:34:59 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	one_philo(t_philos *philo)
 {
-	printf("%lu %i has taken a fork\n", calc_reltime(philo, NOW), 1);
+	printf("%llu %i has taken a fork\n", calc_reltime(philo, NOW), 1);
 	my_sleep(philo->params->ttdie, philo);
 	return ;
 }
@@ -25,22 +25,19 @@ void	*cycle(void *void_philo)
 
 	philo = (t_philos *) void_philo;
 	if (philo->params->num == 1)
-	{
-		one_philo(philo);
-		return (NULL);
-	}
+		return (one_philo(philo), NULL);
 	if (philo->num % 2 == 0)
-		usleep(philo->params->tteat); //hay que arreglar esto dependiendo de si ttdie es menor
+		usleep(philo->params->tteat * 1000);
 	while (check_finished(philo) != FINISHED)
 	{
 		pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
 		if (check_already_dead(philo) != DEAD)
-			printf("%lu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
+			printf("%llu %i has taken rfork\n", calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
 		if (check_already_dead(philo) != DEAD)
 		{
-			printf("%lu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
-			printf("%lu %i is eating\n", calc_reltime(philo, NOW), philo->num);
+			printf("%llu %i has taken lfork\n", calc_reltime(philo, NOW), philo->num);
+			printf("%llu %i is eating\n", calc_reltime(philo, NOW), philo->num);
 		}
 		else
 		{
@@ -93,7 +90,6 @@ int	main(int argc, char **argv)
 	init_params(argv, argc, &params);
 	init_philos(&params);
 	params.starttime = my_time();
-	printf("starttime = %lu\n", params.starttime);
 	i = 0;
 	while (i < params.num)
 	{
@@ -115,4 +111,4 @@ int	main(int argc, char **argv)
 }
 
 //https://github.com/TommyJD93/Philosophers
-//https://github.com/rphlr/42-Evals/blob/main/Cursus/Philosophers/img/all.jpg 
+//https://github.com/rphlr/42-Evals/blob/main/Cursus/Philosophers/img/all.jpg
