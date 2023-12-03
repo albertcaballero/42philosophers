@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 19:26:32 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/03 18:11:05 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/03 19:18:32 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	act_eat(t_philos *philo)
 {
 	pthread_mutex_lock(&philo->params->forks[philo->rfork_ix]);
 	if (check_already_dead(philo) != DEAD)
-		printf("%llu %i has taken a fork\n", calc_reltime(philo, NOW), philo->num);
+		printf("%llu %i has taken a fork\n", \
+			calc_reltime(philo, NOW), philo->num);
 	pthread_mutex_lock(&philo->params->forks[philo->lfork_ix]);
 	if (check_already_dead(philo) == DEAD)
 	{
