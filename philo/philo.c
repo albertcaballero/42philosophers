@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:13:56 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/03 17:50:13 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:12:34 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	demiurge(t_params *params)
 			break ;
 		if (params->eatmax > 0)
 		{
-			if (check_finished(&params->philos[i]) == FIN && params->philos[i].dead != DEAD)
+			if (check_finished(&params->philos[i]) == FIN && \
+				params->philos[i].dead != DEAD)
 				params->finished++;
 			if (params->finished >= params->eatmax)
 				break ;
@@ -65,6 +66,9 @@ void	demiurge(t_params *params)
 
 void	free_params(t_params *params)
 {
+	pthread_mutex_destroy(&params->death_mtx);
+	pthread_mutex_destroy(&params->finish_mtx);
+	pthread_mutex_destroy(&params->time_mtx);
 	if (params->forks)
 		free(params->forks);
 	if (params->philos)
@@ -95,9 +99,6 @@ int	main(int argc, char **argv)
 		pthread_mutex_destroy(&params.forks[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&params.death_mtx);
-	pthread_mutex_destroy(&params.finish_mtx);
-	pthread_mutex_destroy(&params.time_mtx);
 	free_params(&params);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/03 17:42:33 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:05:14 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_already_dead(t_philos *philo)
 	return (ret);
 }
 
-//check if any philosopher has to die... and KILLS THEM!!! returns DEAD if true
+//check if any philo has to die... and KILLS THEM!! returns DEAD if true
 int	kill_philo(t_philos *philo)
 {
 	pthread_mutex_lock(&philo->params->death_mtx);

@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/03 17:41:15 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:11:45 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_params
 {
 	t_philos		*philos;
 	pthread_mutex_t	death_mtx;
-	pthread_mutex_t	msg_mtx;
 	pthread_mutex_t	time_mtx;
 	pthread_mutex_t	finish_mtx;
 	int				num;
@@ -65,6 +64,8 @@ typedef struct s_params
 
 void		*cycle(void *void_philo);
 void		demiurge(t_params *params);
+void		one_philo(t_philos *philo);
+void		free_params(t_params *params);
 
 /* UTILS.C -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-==--==-=-=-=-=-==-*/
 
