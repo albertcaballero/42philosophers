@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:24:57 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/02 16:59:31 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:41:45 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	init_philos(t_params *params)
 		params->philos[i].rfork_ix = i;
 		params->philos[i].lfork_ix = i + 1;
 		params->philos[i].tlastmeal = 0;
-		params->philos[i].status = THINKING;
-		params->philos[i].finished = !FINISHED;
+		params->philos[i].dead = !DEAD;
+		params->philos[i].finished = !FIN;
 		if (params->philos[i].num == params->num)
 			params->philos[i].lfork_ix = 0;
 		i++;

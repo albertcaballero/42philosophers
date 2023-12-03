@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/02 16:17:12 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:42:33 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	check_already_dead(t_philos *philo)
 int	kill_philo(t_philos *philo)
 {
 	pthread_mutex_lock(&philo->params->death_mtx);
-	if (calc_reltime(philo, LMEAL) > philo->params->ttdie && philo->status != EATING)
+	if (calc_reltime(philo, LMEAL) > philo->params->ttdie)
 	{
-		philo->status = DEAD;
+		philo->dead = DEAD;
 		philo->params->death = DEAD;
 		printf("%llu %i Died\n", calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_unlock(&philo->params->death_mtx);
@@ -49,23 +49,23 @@ int	kill_philo(t_philos *philo)
 	return (!DEAD);
 }
 
-//check if a philosopher has eaten all times it needs, returns FINISHED if true
+//check if a philosopher has eaten all times it needs, returns FIN if true
 int	check_finished(t_philos *philo)
 {
 	pthread_mutex_lock(&philo->params->finish_mtx);
-	if (philo->finished == FINISHED)
+	if (philo->finished == FIN)
 	{
 		pthread_mutex_unlock(&philo->params->finish_mtx);
-		return (FINISHED);
+		return (FIN);
 	}
 	if (philo->params->eatmax > 0 && philo->eatcount >= philo->params->eatmax)
 	{
-		philo->finished = FINISHED;
+		philo->finished = FIN;
 		if (check_already_dead(philo) != DEAD)
 			printf("%llu %i has finished\n", calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_unlock(&philo->params->finish_mtx);
-		return (FINISHED);
+		return (FIN);
 	}
 	pthread_mutex_unlock(&philo->params->finish_mtx);
-	return (!FINISHED);
+	return (!FIN);
 }

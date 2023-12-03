@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:14:09 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/02 16:58:09 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:41:15 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@
 # include <stdio.h>
 
 /* STATUS DEFINITIONS -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=*/
-# define SLEEPING 3
-# define EATING 1
-# define THINKING 2
-# define FINISHED 4
+# define FIN 4
 # define DEAD 5
 
 /* TIME FLAGS -==-=-=-==-=-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=*/
@@ -38,7 +35,7 @@ typedef struct s_ph
 	struct s_params	*params;
 	pthread_t		tid;
 	int				num;
-	int				status;
+	int				dead;
 	int				finished;
 	int				eatcount;
 	uint64_t		tlastmeal;
