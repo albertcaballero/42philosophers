@@ -6,7 +6,7 @@
 /*   By: alcaball <alcaball@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:31 by alcaball          #+#    #+#             */
-/*   Updated: 2023/12/03 19:19:07 by alcaball         ###   ########.fr       */
+/*   Updated: 2023/12/05 11:19:05 by alcaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ int	check_finished(t_philos *philo)
 	if (philo->params->eatmax > 0 && philo->eatcount >= philo->params->eatmax)
 	{
 		philo->finished = FIN;
-		if (check_already_dead(philo) != DEAD)
-			printf("%llu %i has finished\n", \
-				calc_reltime(philo, NOW), philo->num);
 		pthread_mutex_unlock(&philo->params->finish_mtx);
 		return (FIN);
 	}
